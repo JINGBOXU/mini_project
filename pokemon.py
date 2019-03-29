@@ -34,7 +34,7 @@ def profile():
     #put data into the cassandra database
     for i in categories:
         rows = session.execute( """INSERT INTO pokemon.stats(datetime,aqi) values('{}',{})""".format(i,categories[i]))
-    return('<h1>Data has been load.</h1>')
+    return('<h1>{}</h1>'.format(air_json))
 #select from the database,find the best air quality in the future 24 hours
 @app.route('/airqualitychart/best')
 def airq():
@@ -43,5 +43,13 @@ def airq():
     for qu in air:
         return('<h1>The best air quality in the next 24 hours is on {}.</h1>'.format(qu.datetime))
     #return('<h1>{}</h1>'.format(categories))
+#Get the air quality of the time
+@app.route('/airqualitychart/best/<time>')
+def airtime(time):
+    #select the air quality due to the time
+    ta = session.execute( """Select * From pokemon.stats where datetime = '{}'""".format(time))
+    for p in ta:
+        return('<h1>{} has the air quality of {}.</h1>'.format(time,p.aqi))
+    return('<h1>That time does not exist!</h1>')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
