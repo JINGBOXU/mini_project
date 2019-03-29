@@ -6,7 +6,10 @@ Lat and lon is the location, hours is the hour you want to predict.
 Make sure you have the key from the web API.
 The data from the API is stored as a json file.
 Then the data I want to use is put into a dictionary. {datetime,aqi}
+Use the URL:http://35.246.39.34/airqualitychart, you can see the json file. 
 Then I insert into cassandra database.(need to create a table on cloud to store data)
 The database has two columes(datetime,aqi).
 I select the max aqi which means the best air quality.
-Finally I show the time in the next 24 hours which has the best air quality.
+I show the time in the next 24 hours which has the best air quality.
+Use the URL:http://35.246.39.34/airqualitychart/best you can see the best time.
+If you want to see the air quality of any time, you can go to http://35.246.39.34/airqualitychart/best/<time>, where the 'time' in the URL is the time you want.
