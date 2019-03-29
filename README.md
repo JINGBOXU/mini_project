@@ -8,6 +8,9 @@ The data from the API is stored as a json file.
 Then the data I want to use is put into a dictionary. {datetime,aqi}
 Use the URL:http://35.246.39.34/airqualitychart, you can see the json file. 
 Then I insert into cassandra database.(need to create a table on cloud to store data)
+    [the terminal instruction is: CREATE KEYSPACE pokemon WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 2};
+                                  CREATE TABLE pokemon.stats (datetime text PRIMARY KEY, aqi int); ]
+The instruction is under cqlsh inside the container: kubectl exec -it cassandra-bk794 cqlsh(names may be different from the example).
 The database has two columes(datetime,aqi).
 I select the max aqi which means the best air quality.
 I show the time in the next 24 hours which has the best air quality.
